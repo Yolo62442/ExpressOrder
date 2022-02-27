@@ -1,17 +1,17 @@
 //
-//  ViewController.swift
-//  Express Order
+//  RegisterViewController.swift
+//  ExpressOrder
 //
-//  Created by Ainura on 17.02.2022.
+//  Created by ra on 2/27/22.
 //
 
 import UIKit
 
 class RegisterViewController: UIViewController {
 
-    @IBOutlet weak var emailTextField1: UITextField!
-    @IBOutlet weak var nextButton1: UIButton!
-    @IBOutlet weak var offerButton1: UIButton!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var offerButton: UIButton!
     
     let attributeString = NSMutableAttributedString(
        string: "условия публичной оферты",

@@ -6,3 +6,4 @@ DerivedData/
 ## Various settings
 *.pbxuser
 xcuserdata/
+.DS_Store

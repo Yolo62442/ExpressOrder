@@ -100,7 +100,8 @@
 				2E2BE53127CAA674007EC208 /* RakhmetViewController.swift */,
 				2E2BE51027CAA4F2007EC208 /* ViewController.swift */,
 				2E2BE52327CAA5EA007EC208 /* MainViewController.swift */,
-				2E2BE52427CAA5EA007EC208 /* Registration */,
+				2E2BE52527CAA5EA007EC208 /* RegistrationPasswordViewController.swift */,
+				11CAAC3127CB89D30020B301 /* RegisterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -119,15 +120,6 @@
 			children = (
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		2E2BE52427CAA5EA007EC208 /* Registration */ = {
-			isa = PBXGroup;
-			children = (
-				2E2BE52527CAA5EA007EC208 /* RegistrationPasswordViewController.swift */,
-				11CAAC3127CB89D30020B301 /* RegisterViewController.swift */,
-			);
-			path = Registration;
 			sourceTree = "<group>";
 		};
 		2E2BE53227CAA674007EC208 /* Cell */ = {

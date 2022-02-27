@@ -82,7 +82,6 @@
 			children = (
 				2E2BE52227CAA578007EC208 /* Model */,
 				2E2BE52127CAA531007EC208 /* View */,
-				2E2BE51227CAA4F2007EC208 /* Main.storyboard */,
 				2E2BE52027CAA515007EC208 /* Controller */,
 				2E2BE50C27CAA4F2007EC208 /* AppDelegate.swift */,
 				2E2BE50E27CAA4F2007EC208 /* SceneDelegate.swift */,
@@ -110,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				2E2BE53227CAA674007EC208 /* Cell */,
+				2E2BE51227CAA4F2007EC208 /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";

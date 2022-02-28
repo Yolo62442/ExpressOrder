@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		11CAAC3227CB89D30020B301 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC3127CB89D30020B301 /* RegisterViewController.swift */; };
+		11CAAC3627CBAC320020B301 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC3527CBAC320020B301 /* NetworkManager.swift */; };
+		11CAAC3827CCDA2F0020B301 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC3727CCDA2F0020B301 /* HTTPMethod.swift */; };
+		11CAAC3A27CCE5610020B301 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC3927CCE5610020B301 /* Restaurant.swift */; };
+		11CAAC3C27CCE75B0020B301 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC3B27CCE75B0020B301 /* Image.swift */; };
+		11CAAC3E27CCE7D90020B301 /* ResponseResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC3D27CCE7D90020B301 /* ResponseResults.swift */; };
 		2E2BE50D27CAA4F2007EC208 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BE50C27CAA4F2007EC208 /* AppDelegate.swift */; };
 		2E2BE50F27CAA4F2007EC208 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BE50E27CAA4F2007EC208 /* SceneDelegate.swift */; };
 		2E2BE51127CAA4F2007EC208 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BE51027CAA4F2007EC208 /* ViewController.swift */; };
@@ -25,10 +30,17 @@
 		2E2BE53B27CAA674007EC208 /* RakhmetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BE53127CAA674007EC208 /* RakhmetViewController.swift */; };
 		2E2BE53C27CAA674007EC208 /* MainMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E2BE53327CAA674007EC208 /* MainMenuTableViewCell.xib */; };
 		2E2BE53D27CAA674007EC208 /* MainMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BE53427CAA674007EC208 /* MainMenuTableViewCell.swift */; };
+		4688070D34584210DB6DAC68 /* Pods_ExpressOrder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A4A30F5CC44829B44F653C /* Pods_ExpressOrder.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		006A63059DBB75A2C8354EB1 /* Pods-ExpressOrder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpressOrder.debug.xcconfig"; path = "Target Support Files/Pods-ExpressOrder/Pods-ExpressOrder.debug.xcconfig"; sourceTree = "<group>"; };
 		11CAAC3127CB89D30020B301 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		11CAAC3527CBAC320020B301 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		11CAAC3727CCDA2F0020B301 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		11CAAC3927CCE5610020B301 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		11CAAC3B27CCE75B0020B301 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		11CAAC3D27CCE7D90020B301 /* ResponseResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseResults.swift; sourceTree = "<group>"; };
 		2E2BE50927CAA4F2007EC208 /* ExpressOrder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpressOrder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E2BE50C27CAA4F2007EC208 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E2BE50E27CAA4F2007EC208 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +60,8 @@
 		2E2BE53127CAA674007EC208 /* RakhmetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RakhmetViewController.swift; sourceTree = "<group>"; };
 		2E2BE53327CAA674007EC208 /* MainMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuTableViewCell.xib; sourceTree = "<group>"; };
 		2E2BE53427CAA674007EC208 /* MainMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewCell.swift; sourceTree = "<group>"; };
+		A6A4A30F5CC44829B44F653C /* Pods_ExpressOrder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpressOrder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E23188BDFC036068A351F685 /* Pods-ExpressOrder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpressOrder.release.xcconfig"; path = "Target Support Files/Pods-ExpressOrder/Pods-ExpressOrder.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4688070D34584210DB6DAC68 /* Pods_ExpressOrder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +81,8 @@
 			children = (
 				2E2BE50B27CAA4F2007EC208 /* ExpressOrder */,
 				2E2BE50A27CAA4F2007EC208 /* Products */,
+				30E52DE48775D8427BAF8F36 /* Pods */,
+				43C0E36A54C309EC0013491A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,6 +135,11 @@
 		2E2BE52227CAA578007EC208 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				11CAAC3527CBAC320020B301 /* NetworkManager.swift */,
+				11CAAC3727CCDA2F0020B301 /* HTTPMethod.swift */,
+				11CAAC3927CCE5610020B301 /* Restaurant.swift */,
+				11CAAC3B27CCE75B0020B301 /* Image.swift */,
+				11CAAC3D27CCE7D90020B301 /* ResponseResults.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -135,6 +157,24 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		30E52DE48775D8427BAF8F36 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				006A63059DBB75A2C8354EB1 /* Pods-ExpressOrder.debug.xcconfig */,
+				E23188BDFC036068A351F685 /* Pods-ExpressOrder.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		43C0E36A54C309EC0013491A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A6A4A30F5CC44829B44F653C /* Pods_ExpressOrder.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -142,9 +182,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E2BE51D27CAA4F3007EC208 /* Build configuration list for PBXNativeTarget "ExpressOrder" */;
 			buildPhases = (
+				2BC2FE9B31D0EDFF0FCCBDB3 /* [CP] Check Pods Manifest.lock */,
 				2E2BE50527CAA4F2007EC208 /* Sources */,
 				2E2BE50627CAA4F2007EC208 /* Frameworks */,
 				2E2BE50727CAA4F2007EC208 /* Resources */,
+				EDDA75799FB4D1D709C34303 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -204,6 +246,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2BC2FE9B31D0EDFF0FCCBDB3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ExpressOrder-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EDDA75799FB4D1D709C34303 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ExpressOrder/Pods-ExpressOrder-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ExpressOrder/Pods-ExpressOrder-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ExpressOrder/Pods-ExpressOrder-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2E2BE50527CAA4F2007EC208 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -211,10 +295,15 @@
 			files = (
 				2E2BE51127CAA4F2007EC208 /* ViewController.swift in Sources */,
 				2E2BE50D27CAA4F2007EC208 /* AppDelegate.swift in Sources */,
+				11CAAC3827CCDA2F0020B301 /* HTTPMethod.swift in Sources */,
 				2E2BE53927CAA674007EC208 /* OrderDetailsViewController.swift in Sources */,
+				11CAAC3627CBAC320020B301 /* NetworkManager.swift in Sources */,
+				11CAAC3E27CCE7D90020B301 /* ResponseResults.swift in Sources */,
+				11CAAC3A27CCE5610020B301 /* Restaurant.swift in Sources */,
 				11CAAC3227CB89D30020B301 /* RegisterViewController.swift in Sources */,
 				2E2BE53627CAA674007EC208 /* OrderTableViewCell.swift in Sources */,
 				2E2BE50F27CAA4F2007EC208 /* SceneDelegate.swift in Sources */,
+				11CAAC3C27CCE75B0020B301 /* Image.swift in Sources */,
 				2E2BE53A27CAA674007EC208 /* OrdersViewController.swift in Sources */,
 				2E2BE53527CAA674007EC208 /* OrderListTableViewCell.swift in Sources */,
 				2E2BE53B27CAA674007EC208 /* RakhmetViewController.swift in Sources */,
@@ -364,6 +453,7 @@
 		};
 		2E2BE51E27CAA4F3007EC208 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 006A63059DBB75A2C8354EB1 /* Pods-ExpressOrder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -392,6 +482,7 @@
 		};
 		2E2BE51F27CAA4F3007EC208 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E23188BDFC036068A351F685 /* Pods-ExpressOrder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

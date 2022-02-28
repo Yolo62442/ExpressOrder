@@ -10,6 +10,9 @@ import UIKit
 class MainViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    let networkManager = NetworkManager()
+    let path: String = "/api/restaurants"
+    var restaurants: [RestaurantData]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,17 +20,36 @@ class MainViewController: UIViewController {
         tableView.delegate = self
         tableView.register(MainMenuTableViewCell.nib, forCellReuseIdentifier: MainMenuTableViewCell.identifier)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        networkManager.path = path
+        networkManager.fetchRestaurants { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let restaurants):
+                self.restaurants = restaurants
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return restaurants?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MainMenuTableViewCell.identifier) as! MainMenuTableViewCell
-        cell.configureCell(image: UIImage(named: "testImage"), title: "Del Papa", street: "ул. Бухар жырау, 66, уг. ул. Ауэзова")
+        let restaurant = restaurants?[indexPath.row]
+        cell.configureCell(image: restaurant?.image, title: restaurant?.restaurantData.name, location: restaurant?.restaurantData.location)
         return cell
     }
 }

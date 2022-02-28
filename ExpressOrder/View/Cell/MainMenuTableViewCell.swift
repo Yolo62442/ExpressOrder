@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MainMenuTableViewCell: UITableViewCell {
     static let identifier = "MainMenuTableViewCell"
@@ -13,7 +14,8 @@ class MainMenuTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var restaurantImageView: UIImageView!
-    @IBOutlet weak var streetLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         restaurantImageView.layer.masksToBounds = true
@@ -24,11 +26,11 @@ class MainMenuTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configureCell(image: UIImage?, title: String, street: String) {
+    func configureCell(image: Image?, title: String?, location: String?) {
         if let image = image {
-            restaurantImageView.image = image
+            restaurantImageView.kf.setImage(with: image.url)
         }
         titleLabel.text = title
-        streetLabel.text = street
+        locationLabel.text = location
     }
 }

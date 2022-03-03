@@ -21,6 +21,7 @@ class ProductsTVCell: UITableViewCell {
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var counterLabel: UILabel!
     weak var delegate: CartDelegate?
+    var id = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,14 +37,14 @@ class ProductsTVCell: UITableViewCell {
         
         if sender.value == 0{
             plusButton.isHidden = false
-            delegate?.removeFromCart()
+            delegate?.removeFromCart(id: id)
             counterStepper.isHidden = true
             counterLabel.isHidden = true
         }
     }
     @IBAction func plusButtonTapped(_ sender: Any) {
         plusButton.isHidden = true
-        delegate?.addToCart()
+        delegate?.addToCart(id: id)
         counterStepper.isHidden = false
         counterLabel.isHidden = false
         counterStepper.value = 1

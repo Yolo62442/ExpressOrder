@@ -8,8 +8,8 @@
 import UIKit
 
 protocol CartDelegate: AnyObject {
-    func addToCart()
-    func removeFromCart()
+    func addToCart(id: Int)
+    func removeFromCart(id: Int)
 }
 
 
@@ -18,18 +18,19 @@ class MainMenuViewController: UIViewController {
     
     @IBOutlet weak var productBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var cartTopConstraint: NSLayoutConstraint!
-    
-    
     @IBOutlet weak var imagesCollectionView: UICollectionView!
+    @IBOutlet weak var productsTV: UITableView!
+    @IBOutlet weak var groupsCollectionView: UICollectionView!
+    @IBOutlet weak var cartButtonView: UIView!
+    @IBOutlet weak var cartButton: UIView!
+    var cart: [Int:Int] = [:]
     var imagesArr = [
         UIImage(named: "testImage"),
         UIImage(named: "testImage"),
         UIImage(named: "testImage")
     ]
     var sections = [ "Group1", "Group2", "Group3"]
-    @IBOutlet weak var productsTV: UITableView!
-    @IBOutlet weak var groupsCollectionView: UICollectionView!
-    @IBOutlet weak var cartButtonView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
@@ -45,27 +46,39 @@ class MainMenuViewController: UIViewController {
         productsTV.rowHeight = UITableView.automaticDimension
         productsTV.estimatedRowHeight = CGFloat(44.0)
     }
-
-    
+    @IBAction func cartButtonTapped(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(identifier: "CartViewController") as! CartViewController
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
+//MARK: - CartDelegate
 extension MainMenuViewController: CartDelegate{
-    func addToCart() {
+    func addToCart(id: Int) {
+        if(cart.keys.contains(id)){
+            cart[id]! += 1
+        }else{
+            cart[id] = 1
+        }
         cartButtonView.isHidden = false
         productBottomConstraint.isActive = false
         cartTopConstraint.isActive = true
-        
-        
     }
-    
-    func removeFromCart() {
-        cartButtonView.isHidden = true
-        cartTopConstraint.isActive = false
-        productBottomConstraint.isActive = true
+    func removeFromCart(id: Int) {
+        if(cart[id] == 1){
+            cart.removeValue(forKey: id)
+        }else{
+            cart[id]! -= 1
+        }
+        if(cart.isEmpty){
+            cartButtonView.isHidden = true
+            cartTopConstraint.isActive = false
+            productBottomConstraint.isActive = true
+        }
     }
-    
-    
 }
+
+//MARK: - UITableViewDelegate
 extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -76,6 +89,7 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ProductsTVCell.identifier, for: indexPath) as! ProductsTVCell
+        cell.id = indexPath.row
         cell.delegate = self
         return cell
     }
@@ -94,6 +108,8 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource{
         return headerView
     }
 }
+
+//MARK: - UICollectionViewDelegate,UICollectionViewDataSource
 extension MainMenuViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == groupsCollectionView{
@@ -120,6 +136,7 @@ extension MainMenuViewController: UICollectionViewDelegate, UICollectionViewData
     
 }
 
+//MARK: - UICollectionViewDelegateFlowLayout
 extension MainMenuViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = collectionView.frame.size

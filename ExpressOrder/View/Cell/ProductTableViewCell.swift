@@ -1,14 +1,16 @@
 //
-//  OrderListTableViewCell.swift
-//  Express Order
+//  ProductTableViewCell.swift
+//  ExpressOrder
 //
-//  Created by Ainura on 21.02.2022.
+//  Created by Ainura on 02.03.2022.
 //
 
 import UIKit
 
-class OrderListTableViewCell: UITableViewCell {
-
+class ProductTableViewCell: UITableViewCell {
+    
+    static let identifier = "ProductTableViewCell"
+    static let nib = UINib(nibName: identifier, bundle: nil)
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

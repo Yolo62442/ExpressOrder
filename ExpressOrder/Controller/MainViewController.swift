@@ -23,6 +23,7 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
         networkManager.path = path
         networkManager.fetchRestaurants { [weak self] result in
             guard let self = self else { return }
@@ -51,5 +52,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let restaurant = restaurants?[indexPath.row]
         cell.configureCell(image: restaurant?.image, title: restaurant?.restaurantData.name, location: restaurant?.restaurantData.location)
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "MainMenuViewController") as! MainMenuViewController
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

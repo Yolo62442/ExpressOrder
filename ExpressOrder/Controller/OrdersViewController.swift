@@ -35,15 +35,10 @@ class OrdersViewController: UIViewController {
 
 extension OrdersViewController: DetailsDelegate{
     func sendToDetailVC() {
-        /*let vc = storyboard?.instantiateViewController(identifier: "OrderDetailsViewController") as! OrderDetailsViewController
+        let vc = storyboard?.instantiateViewController(identifier: "OrderDetailsViewController") as! OrderDetailsViewController
                 
-                navigationController?.pushViewController(vc, animated: true)*/
-        print("hello")
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                if let vc = storyboard.instantiateViewController(withIdentifier: "OrderDetailsViewController") as? OrderDetailsViewController{
-                    vc.modalPresentationStyle = .fullScreen
-                    present(vc, animated: true, completion: nil)
-                }
+                navigationController?.pushViewController(vc, animated: true)
+      
                   
     }
     

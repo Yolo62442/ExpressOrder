@@ -10,7 +10,7 @@ import Foundation
 class NetworkManager {
     let scheme = "http"
     let host = "142.93.107.238"
-    var path: String = ""
+    var path: ApiPath = .restaurants
     var method: HTTPMethod = .get
     var headers: [String: String]?
     var queryItems: [String: String]?
@@ -20,7 +20,7 @@ class NetworkManager {
         var components = URLComponents()
         components.scheme = scheme
         components.host = host
-        components.path = path
+        components.path = path.stringPath
         if let queryItems = queryItems {
             components.queryItems = queryItems.map{ URLQueryItem(name: $0.0, value: $0.1) }
         }
@@ -46,6 +46,20 @@ class NetworkManager {
             do {
                 let restaurant = try JSONDecoder().decode([Restaurant].self, from: data)
                 completion(.success(restaurant.map{ $0.restaurant }))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+    
+    func fetchData<T: Codable>(completion: @escaping ((Result<T>) -> Void)) {
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if let error = error { return completion(.failure(error)) }
+            guard let response = response as? HTTPURLResponse, 200..<300 ~= response.statusCode else { return completion(.failure(NSError())) }
+            guard let data = data else { return completion(.failure(NSError())) }
+            do {
+                let result = try JSONDecoder().decode(T.self, from: data)
+                completion(.success(result))
             } catch {
                 completion(.failure(error))
             }

@@ -12,12 +12,12 @@ struct Restaurant: Codable {
 }
 
 struct RestaurantData: Codable {
-    let restaurantData: RestaurantDataContent
+    let data: RestaurantDataContent
     let image: Image
     
     enum CodingKeys: String, CodingKey {
         case image
-        case restaurantData = "restaurant_data"
+        case data = "restaurant_data"
     }
 }
 

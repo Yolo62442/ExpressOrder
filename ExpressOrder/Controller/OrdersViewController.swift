@@ -33,22 +33,15 @@ class OrdersViewController: UIViewController {
 
 }
 
+//MARK: - Send data to Order Details
 extension OrdersViewController: DetailsDelegate{
     func sendToDetailVC() {
-        /*let vc = storyboard?.instantiateViewController(identifier: "OrderDetailsViewController") as! OrderDetailsViewController
-                
-                navigationController?.pushViewController(vc, animated: true)*/
-        print("hello")
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                if let vc = storyboard.instantiateViewController(withIdentifier: "OrderDetailsViewController") as? OrderDetailsViewController{
-                    vc.modalPresentationStyle = .fullScreen
-                    present(vc, animated: true, completion: nil)
-                }
-                  
+        let vc = storyboard?.instantiateViewController(identifier: "OrderDetailsViewController") as! OrderDetailsViewController
+        navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
+//MARK: - UITableViewDelegate
 extension OrdersViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1

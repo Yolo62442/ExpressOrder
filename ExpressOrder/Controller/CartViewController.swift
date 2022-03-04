@@ -1,46 +1,40 @@
 //
-//  OrderDetailsViewController.swift
-//  Express Order
+//  CartViewController.swift
+//  ExpressOrder
 //
-//  Created by Ainura on 21.02.2022.
+//  Created by Ainura on 04.03.2022.
 //
 
 import UIKit
 
-class OrderDetailsViewController: UIViewController {
-
-    @IBOutlet weak var cafeTitleLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var orderNumLabel: UILabel!
-    @IBOutlet weak var orderListTableView: UITableView!
-
+class CartViewController: UIViewController {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var productsTV: UITableView!
+    
+    @IBOutlet weak var payButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTableView()
+        productsTV.delegate = self
+        productsTV.dataSource = self
+        productsTV.register(ProductsTVCell.nib, forCellReuseIdentifier: ProductsTVCell.identifier)
+        // Do any additional setup after loading the view.
     }
-
-        func configureTableView(){
-            orderListTableView.delegate = self
-            orderListTableView.dataSource = self
-            orderListTableView.register(OrderDetailsTVCell.nib, forCellReuseIdentifier: OrderDetailsTVCell.identifier)
-               
-           }
+    
+    @IBAction func payButtonTaapped(_ sender: Any) {
+    }
 }
 
 //MARK: - UITableViewDelegate
-
-extension OrderDetailsViewController: UITableViewDelegate, UITableViewDataSource{
+extension CartViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: OrderDetailsTVCell.identifier, for: indexPath) as! OrderDetailsTVCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ProductsTVCell.identifier, for: indexPath) as! ProductsTVCell
         return cell
     }
-   
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }

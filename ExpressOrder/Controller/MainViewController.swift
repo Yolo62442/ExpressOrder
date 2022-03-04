@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
         networkManager.path = .restaurants
         networkManager.fetchRestaurants { [weak self] result in
             guard let self = self else { return }
@@ -58,7 +59,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         networkManager.fetchData { (result: Result<Menu>) in
             switch result {
             case .success(let menu):
-                print(menu)
+                let vc = storyboard?.instantiateViewController(withIdentifier: "MainMenuViewController") as! MainMenuViewController
+                navigationController?.pushViewController(vc, animated: true)
             case .failure(let error):
                 print(error.localizedDescription)
             }

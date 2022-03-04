@@ -30,6 +30,7 @@ class MainMenuViewController: UIViewController {
         UIImage(named: "testImage")
     ]
     var sections = [ "Group1", "Group2", "Group3"]
+    var menu: Menu?
     
     override func viewDidLoad() {
         super.viewDidLoad()

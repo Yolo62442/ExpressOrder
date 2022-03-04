@@ -56,11 +56,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let restaurant = restaurants?[indexPath.row]
         networkManager.path = .menu(restaurant?.data.id ?? 1)
-        networkManager.fetchData { (result: Result<Menu>) in
+        networkManager.fetchData { [weak self] (result: Result<Menu>) in
+            guard let self = self else { return }
             switch result {
             case .success(let menu):
-                let vc = storyboard?.instantiateViewController(withIdentifier: "MainMenuViewController") as! MainMenuViewController
-                navigationController?.pushViewController(vc, animated: true)
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainMenuViewController") as! MainMenuViewController
+                vc.menu = menu
+                self.navigationController?.pushViewController(vc, animated: true)
             case .failure(let error):
                 print(error.localizedDescription)
             }

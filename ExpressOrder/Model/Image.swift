@@ -10,9 +10,9 @@ import Foundation
 struct Image: Codable {
     let id: Int
     let url: URL
-    let restaurantId: Int?
-    let createdAt: String?
-    let updatedAt: String?
+    let restaurantId: Int
+    let createdAt: String
+    let updatedAt: String
     
     enum CodingKeys: String, CodingKey {
         case id

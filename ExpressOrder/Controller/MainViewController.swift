@@ -11,7 +11,6 @@ class MainViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     let networkManager = NetworkManager()
-    let path: String = "/api/restaurants"
     var restaurants: [RestaurantData]?
     
     override func viewDidLoad() {
@@ -24,7 +23,7 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
-        networkManager.path = path
+        networkManager.path = .restaurants
         networkManager.fetchRestaurants { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -50,11 +49,21 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MainMenuTableViewCell.identifier) as! MainMenuTableViewCell
         let restaurant = restaurants?[indexPath.row]
-        cell.configureCell(image: restaurant?.image, title: restaurant?.restaurantData.name, location: restaurant?.restaurantData.location)
+        cell.configureCell(image: restaurant?.image, title: restaurant?.data.name, location: restaurant?.data.location)
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "MainMenuViewController") as! MainMenuViewController
-        navigationController?.pushViewController(vc, animated: true)
+        let restaurant = restaurants?[indexPath.row]
+        networkManager.path = .menu(restaurant?.data.id ?? 1)
+        networkManager.fetchData { (result: Result<Menu>) in
+            switch result {
+            case .success(let menu):
+                let vc = storyboard?.instantiateViewController(withIdentifier: "MainMenuViewController") as! MainMenuViewController
+                navigationController?.pushViewController(vc, animated: true)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

@@ -25,9 +25,9 @@ struct RestaurantDataContent: Codable {
     let id: Int
     let name: String
     let location: String
-    let images: [Image]
-    let createdAt: String
-    let updatedAt: String
+    let images: [Image]?
+    let createdAt: String?
+    let updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name, location

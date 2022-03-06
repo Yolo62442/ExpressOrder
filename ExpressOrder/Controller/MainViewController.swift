@@ -40,7 +40,6 @@ class MainViewController: UIViewController {
     }
 }
 
-
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return restaurants?.count ?? 0
@@ -60,9 +59,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             guard let self = self else { return }
             switch result {
             case .success(let menu):
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainMenuViewController") as! MainMenuViewController
-                vc.menu = menu
-                self.navigationController?.pushViewController(vc, animated: true)
+                DispatchQueue.main.async {
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainMenuViewController") as! MainMenuViewController
+                    vc.menu = menu.data
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }

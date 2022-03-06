@@ -11,28 +11,42 @@ class CartViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var productsTV: UITableView!
-    
     @IBOutlet weak var payButton: UIButton!
+    weak var delegate: CartDelegate?
+    var cart: [CartProduct]?
+    var restaurant: RestaurantDataContent?
+    private var totalPrice: Int {
+        guard let cart = cart else { return 0 }
+        let price = cart.reduce(0) { $0 + ($1.product.price * $1.count) }
+        return price
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         productsTV.delegate = self
         productsTV.dataSource = self
         productsTV.register(ProductsTVCell.nib, forCellReuseIdentifier: ProductsTVCell.identifier)
-        // Do any additional setup after loading the view.
+        titleLabel.text = restaurant?.name
+        addressLabel.text = restaurant?.location
     }
     
     @IBAction func payButtonTaapped(_ sender: Any) {
+
     }
 }
 
 //MARK: - UITableViewDelegate
 extension CartViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return cart?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ProductsTVCell.identifier, for: indexPath) as! ProductsTVCell
+        if let cartProduct = cart?[indexPath.row] {
+            cell.configureCell(product: cartProduct.product, count: cartProduct.count)
+        }
+        cell.delegate = self
         return cell
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -45,13 +59,15 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource{
         let title = UILabel(frame: CGRect(x: 10, y: 0, width: widthOfHeader, height: 40))
         title.font = UIFont.systemFont(ofSize: CGFloat(17), weight: .bold)
         title.textColor = UIColor.darkGray
-        title.text = "Позиция в заказе"
+        title.text = "Мой заказ"
         headerView.addSubview(title)
         return headerView
     }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 61
     }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = UIView()
         let separatorView = UIView(frame: CGRect(x: 10, y: 0, width: tableView.bounds.width - 20, height: 1))
@@ -63,14 +79,30 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource{
         title.textColor = UIColor.black
         title.text = "Итого"
         footerView.addSubview(title)
-        let price = UILabel(frame: CGRect(x: 10 + widthOfFooter, y: 0, width: widthOfFooter, height: 60))
-        price.font = UIFont.systemFont(ofSize: CGFloat(17), weight: .bold)
-        price.textColor = UIColor.black
-        price.textAlignment = .right
-        price.text = "3 900 тг"
+        let priceLabel = UILabel(frame: CGRect(x: 10 + widthOfFooter, y: 0, width: widthOfFooter, height: 60))
+        priceLabel.font = UIFont.systemFont(ofSize: CGFloat(17), weight: .bold)
+        priceLabel.textColor = UIColor.black
+        priceLabel.textAlignment = .right
+        priceLabel.text = totalPrice.prettyNumber() + " ₸"
         footerView.addSubview(separatorView)
         footerView.addSubview(title)
-        footerView.addSubview(price)
+        footerView.addSubview(priceLabel)
         return footerView
+    }
+}
+
+//MARK: - CartDelegate
+extension CartViewController: CartDelegate {
+    func countChanged(for product: Product, count: Int) {
+        let index = cart?.firstIndex { $0.product == product }
+        if let index = index {
+            cart?[index].count = count
+            if count == 0 {
+                cart?.remove(at: index)
+            }
+        } else {
+            cart?.append((product, 1))
+        }
+        delegate?.cartChanged(cart)
     }
 }

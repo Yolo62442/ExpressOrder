@@ -39,17 +39,18 @@ struct ProductCategory: Codable {
     }
 }
 
-struct Product: Codable {
+struct Product: Codable, Equatable {
     let id: Int
     let name: String
     let price: Int
     let description: String
-    let image: URL
+    let imageUrl: URL
 
     enum CodingKeys: String, CodingKey {
-        case price, image
+        case price
         case id = "product_id"
         case name = "product_name"
+        case imageUrl = "image"
         case description = "description"
     }
 }

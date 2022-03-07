@@ -23,8 +23,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kdq-Wp-EFa">
-                        <rect key="frame" x="10" y="64" width="87.5" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kdq-Wp-EFa">
+                        <rect key="frame" x="10" y="64" width="197" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -86,7 +86,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1600" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QkN-bE-ruD">
-                        <rect key="frame" x="10" y="105" width="38.5" height="21"/>
+                        <rect key="frame" x="10" y="104.5" width="38.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" name="AccentColor"/>
                         <nil key="highlightedColor"/>
@@ -96,6 +96,7 @@
                     <constraint firstItem="n4u-IS-KSJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="6wz-Xa-TTB"/>
                     <constraint firstAttribute="bottom" secondItem="n4u-IS-KSJ" secondAttribute="bottom" constant="20" id="GpE-QZ-Ie0"/>
                     <constraint firstItem="QkN-bE-ruD" firstAttribute="top" secondItem="Kdq-Wp-EFa" secondAttribute="bottom" constant="20" id="K4E-HX-k9c"/>
+                    <constraint firstItem="n4u-IS-KSJ" firstAttribute="leading" secondItem="Kdq-Wp-EFa" secondAttribute="trailing" constant="10" id="M2n-K6-l21"/>
                     <constraint firstItem="N8Z-Ym-u5q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="MDe-Lq-VSE"/>
                     <constraint firstItem="N8Z-Ym-u5q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Vph-bc-vng"/>
                     <constraint firstItem="Kdq-Wp-EFa" firstAttribute="top" secondItem="N8Z-Ym-u5q" secondAttribute="bottom" constant="20" id="bWR-hz-yoY"/>

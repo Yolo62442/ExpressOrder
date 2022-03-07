@@ -7,27 +7,20 @@
 
 import Foundation
 
-class NetworkManager: NSObject {
+class NetworkManager {
     let scheme = "http"
     let host = "142.93.107.238"
-    var path: ApiPath = .restaurants
+    var path: String = ""
     var method: HTTPMethod = .get
     var headers: [String: String]?
     var queryItems: [String: String]?
     var bodyParameters: [String: Any]?
     
-    private var session: URLSession = .init(configuration: .default)
-    
-    public override init() {
-        super.init()
-        session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
-    }
-    
     private var urlComponents: URLComponents {
         var components = URLComponents()
         components.scheme = scheme
         components.host = host
-        components.path = path.stringPath
+        components.path = path
         if let queryItems = queryItems {
             components.queryItems = queryItems.map{ URLQueryItem(name: $0.0, value: $0.1) }
         }
@@ -46,7 +39,7 @@ class NetworkManager: NSObject {
     }
     
     func fetchRestaurants(completion: @escaping ((RestaurantResult) -> Void)) {
-        session.dataTask(with: urlRequest) { (data, response, error) in
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             if let error = error { return completion(.failure(error)) }
             guard let response = response as? HTTPURLResponse, 200..<300 ~= response.statusCode else { return completion(.failure(NSError())) }
             guard let data = data else { return completion(.failure(NSError())) }
@@ -59,24 +52,5 @@ class NetworkManager: NSObject {
         }.resume()
     }
     
-    func fetchData<T: Codable>(completion: @escaping ((Result<T>) -> Void)) {
-        session.dataTask(with: urlRequest) { (data, response, error) in
-            if let error = error { return completion(.failure(error)) }
-            guard let response = response as? HTTPURLResponse, 200..<300 ~= response.statusCode else { return completion(.failure(NSError())) }
-            guard let data = data else { return completion(.failure(NSError())) }
-            do {
-                let result = try JSONDecoder().decode(T.self, from: data)
-                completion(.success(result))
-            } catch {
-                completion(.failure(error))
-            }
-        }.resume()
-    }
-}
-
-extension NetworkManager: URLSessionDelegate {
-    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        let urlCredential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
-        completionHandler(.useCredential, urlCredential)
-    }
+   
 }

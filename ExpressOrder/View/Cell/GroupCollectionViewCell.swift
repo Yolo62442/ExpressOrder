@@ -16,5 +16,8 @@ class GroupCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+    func configureCell(categoryName: String?) {
+        groupTitleLabel.text = categoryName
+    }
 }

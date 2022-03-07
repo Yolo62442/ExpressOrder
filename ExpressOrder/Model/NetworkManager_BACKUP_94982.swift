@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkManager: NSObject {
+class NetworkManager {
     let scheme = "http"
     let host = "142.93.107.238"
     var path: ApiPath = .restaurants
@@ -15,13 +15,6 @@ class NetworkManager: NSObject {
     var headers: [String: String]?
     var queryItems: [String: String]?
     var bodyParameters: [String: Any]?
-    
-    private var session: URLSession = .init(configuration: .default)
-    
-    public override init() {
-        super.init()
-        session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
-    }
     
     private var urlComponents: URLComponents {
         var components = URLComponents()
@@ -46,7 +39,7 @@ class NetworkManager: NSObject {
     }
     
     func fetchRestaurants(completion: @escaping ((RestaurantResult) -> Void)) {
-        session.dataTask(with: urlRequest) { (data, response, error) in
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             if let error = error { return completion(.failure(error)) }
             guard let response = response as? HTTPURLResponse, 200..<300 ~= response.statusCode else { return completion(.failure(NSError())) }
             guard let data = data else { return completion(.failure(NSError())) }
@@ -59,8 +52,9 @@ class NetworkManager: NSObject {
         }.resume()
     }
     
+<<<<<<< Updated upstream
     func fetchData<T: Codable>(completion: @escaping ((Result<T>) -> Void)) {
-        session.dataTask(with: urlRequest) { (data, response, error) in
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             if let error = error { return completion(.failure(error)) }
             guard let response = response as? HTTPURLResponse, 200..<300 ~= response.statusCode else { return completion(.failure(NSError())) }
             guard let data = data else { return completion(.failure(NSError())) }
@@ -72,11 +66,7 @@ class NetworkManager: NSObject {
             }
         }.resume()
     }
-}
-
-extension NetworkManager: URLSessionDelegate {
-    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        let urlCredential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
-        completionHandler(.useCredential, urlCredential)
-    }
+=======
+   
+>>>>>>> Stashed changes
 }

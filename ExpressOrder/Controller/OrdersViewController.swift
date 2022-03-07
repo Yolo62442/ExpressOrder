@@ -12,6 +12,8 @@ protocol DetailsDelegate: AnyObject{
 
 class OrdersViewController: UIViewController {
     @IBOutlet weak var ordersTableView: UITableView!
+    @IBOutlet weak var unauthorizedView: UIView!
+    @IBOutlet weak var logInButton: UIButton!
     var cellId = "OrderTableViewCell"
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -21,6 +23,7 @@ class OrdersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        unauthorizedView.isHidden = true
         // Do any additional setup after loading the view.
     }
     func configureTableView(){
@@ -30,7 +33,9 @@ class OrdersViewController: UIViewController {
            
        }
     
-
+    @IBAction func logInTapped(_ sender: Any) {
+    }
+    
 }
 
 //MARK: - Send data to Order Details
@@ -55,6 +60,10 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource{
         cell.clipsToBounds = true
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(identifier: "OrderDetailsViewController") as! OrderDetailsViewController
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 105
@@ -70,6 +79,6 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource{
             let headerView = UIView()
         headerView.backgroundColor = UIColor.clear
             return headerView
-        }
+    }
 }
  

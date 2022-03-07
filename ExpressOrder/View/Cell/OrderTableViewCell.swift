@@ -17,8 +17,6 @@ class OrderTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBAction func detailsButton(_ sender: Any) {
-    }
     @IBOutlet weak var statusLabel: UILabel!
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -26,7 +24,4 @@ class OrderTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func DetailsButtonTapped(_ sender: Any) {
-        delegate?.sendToDetailVC()
-    }
 }

@@ -12,7 +12,9 @@ protocol CartDelegate: AnyObject {
     func countChanged(for product: Product, count: Int)
     func cartChanged(_ cart: [CartProduct]?)
 }
-
+protocol SectionsDelegate: AnyObject{
+    func scrollToSection(section: Int)
+}
 extension CartDelegate {
     func cartChanged(_ cart: [CartProduct]?) { }
 }
@@ -28,6 +30,7 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var groupsCollectionView: UICollectionView!
     @IBOutlet weak var cartButtonView: UIView!
     @IBOutlet weak var cartButton: UIView!
+    @IBOutlet weak var sectionsButton: UIButton!
     var currentSelected:Int = 0
     
     private var cart = [CartProduct]()
@@ -52,7 +55,11 @@ class MainMenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        productsTV.reloadData()
+        let indexpath = IndexPath(row: currentSelected, section: 0)
+        self.groupsCollectionView.scrollToItem(at: indexpath, at: .left, animated: true)
+        let indexPath1 = IndexPath(row: 0, section: currentSelected)
+        self.productsTV.scrollToRow(at: indexPath1, at: .top, animated: true)
+        groupsCollectionView.reloadData()
     }
     
     @IBAction func cartButtonTapped(_ sender: Any) {
@@ -63,6 +70,13 @@ class MainMenuViewController: UIViewController {
         vc.restaurant = RestaurantDataContent(id: menu.restaurantId, name: menu.restaurantName, location: menu.location, images: nil, createdAt: nil, updatedAt: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
+    @IBAction func sectionsButtonTapped(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(identifier: "SectionsViewController") as! SectionsViewController
+        vc.menu = menu
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 //MARK: - CartDelegate
@@ -90,6 +104,13 @@ extension MainMenuViewController: CartDelegate {
             productBottomConstraint.isActive = false
             cartTopConstraint.isActive = true
         }
+    }
+}
+
+//MARK: - SectionDelegate
+extension MainMenuViewController: SectionsDelegate{
+    func scrollToSection(section: Int) {
+        currentSelected = section
     }
 }
 

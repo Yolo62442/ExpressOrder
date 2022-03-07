@@ -15,11 +15,7 @@ class CartViewController: UIViewController {
     weak var delegate: CartDelegate?
     var cart: [CartProduct]?
     var restaurant: RestaurantDataContent?
-    private var totalPrice: Int {
-        guard let cart = cart else { return 0 }
-        let price = cart.reduce(0) { $0 + ($1.product.price * $1.count) }
-        return price
-    }
+    var totalPrice: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +24,11 @@ class CartViewController: UIViewController {
         productsTV.register(ProductsTVCell.nib, forCellReuseIdentifier: ProductsTVCell.identifier)
         titleLabel.text = restaurant?.name
         addressLabel.text = restaurant?.location
+        totalPrice = countTotalPrice()
+    }
+    func countTotalPrice() -> Int{
+        let price = cart?.reduce(0) { $0 + ($1.product.price * $1.count) }
+        return price ?? 0
     }
     
     @IBAction func payButtonTaapped(_ sender: Any) {
@@ -100,9 +101,18 @@ extension CartViewController: CartDelegate {
             if count == 0 {
                 cart?.remove(at: index)
             }
+            if (cart?.isEmpty ?? true) {
+                payButton.isEnabled = false
+            }
         } else {
             cart?.append((product, 1))
+            if (!payButton.isEnabled){
+                payButton.isEnabled = true
+            }
         }
         delegate?.cartChanged(cart)
+        self.totalPrice = countTotalPrice()
+        self.productsTV.reloadData()
     }
 }
+    

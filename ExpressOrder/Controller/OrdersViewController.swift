@@ -23,7 +23,7 @@ class OrdersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        unauthorizedView.isHidden = true
+//        unauthorizedView.isHidden = true
         // Do any additional setup after loading the view.
     }
     func configureTableView(){
@@ -34,6 +34,8 @@ class OrdersViewController: UIViewController {
        }
     
     @IBAction func logInTapped(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "LogInViewController") as! LogInViewController
+        navigationController?.pushViewController(vc, animated: false)
     }
     
 }

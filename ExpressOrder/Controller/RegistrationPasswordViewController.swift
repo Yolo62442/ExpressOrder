@@ -34,6 +34,7 @@ class RegistrationPasswordViewController: UIViewController {
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         guard let email = email, let password = passwordTextField.text else { return }
         print(email, password)
+        navigationController?.popToRootViewController(animated: false)
     }
 }
 

@@ -13,7 +13,6 @@ class OrderTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    weak var delegate: DetailsDelegate?
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -24,4 +23,12 @@ class OrderTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configureCell(title: String?, price: Int?, date: String?, status: String?) {
+        titleLabel.text = title
+        if let price = price {
+            priceLabel.text = "\(price.prettyNumber()) тг"
+        }
+        dateLabel.text = date
+        statusLabel.text = status
+    }
 }

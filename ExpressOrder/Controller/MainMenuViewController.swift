@@ -37,7 +37,14 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var quantityLabel: UILabel!
     private var cart = [CartProduct]()
     var menu: MenuData?
-    var quantity = 0
+    private var quantity: Int {
+        let count = cart.reduce(0) { $0 +  $1.count }
+        return count
+    }
+    private var totalPrice: Int {
+        let price = cart.reduce(0) { $0 + ($1.product.price * $1.count) }
+        return price
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,15 +89,6 @@ class MainMenuViewController: UIViewController {
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
-    func countTotalPrice() -> Int{
-        let price = cart.reduce(0) { $0 + ($1.product.price * $1.count) }
-        return price
-    }
-    func countQuantity() -> Int{
-        let price = cart.reduce(0) { $0 +  $1.count }
-        return price
-    }
-    
 }
 
 //MARK: - CartDelegate
@@ -118,13 +116,13 @@ extension MainMenuViewController: CartDelegate {
             productBottomConstraint.isActive = false
             cartTopConstraint.isActive = true
         }
-        quantityLabel.text = "\(countQuantity()) шт"
-        priceLabel.text = "\(countTotalPrice())  ₸"
+        quantityLabel.text = "\(quantity) шт"
+        priceLabel.text = "\(totalPrice.prettyNumber()) ₸"
     }
 }
 
 //MARK: - SectionDelegate
-extension MainMenuViewController: SectionsDelegate{
+extension MainMenuViewController: SectionsDelegate {
     func scrollToSection(section: Int) {
         currentSelected = section
     }

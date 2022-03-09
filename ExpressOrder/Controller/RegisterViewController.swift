@@ -29,6 +29,7 @@ class RegisterViewController: UIViewController {
         nextButton.layer.masksToBounds = true
         nextButton.layer.cornerRadius = 5
         offerButton.setAttributedTitle(attributeString, for: .normal)
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
     }
 
     @IBAction func textFieldChanged(_ sender: UITextField) {

@@ -16,9 +16,11 @@
 		11CAAC4027CFED910020B301 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC3F27CFED910020B301 /* Menu.swift */; };
 		11CAAC4227CFF76F0020B301 /* ApiPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC4127CFF76F0020B301 /* ApiPath.swift */; };
 		11CAAC4627D4B8DB0020B301 /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC4527D4B8DB0020B301 /* CartProduct.swift */; };
-		11CAAC4827D4C1380020B301 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC4727D4C1380020B301 /* IntExtension.swift */; };
+		11CAAC4827D4C1380020B301 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC4727D4C1380020B301 /* Extension.swift */; };
 		11CAAC4A27D624F50020B301 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC4927D624F50020B301 /* Validator.swift */; };
-		11CAAC4C27D62B0D0020B301 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC4B27D62B0D0020B301 /* Auth.swift */; };
+		11CAAC4C27D62B0D0020B301 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAAC4B27D62B0D0020B301 /* User.swift */; };
+		11E5735927D940AE00B4CC9F /* KeysDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5735827D940AE00B4CC9F /* KeysDefaults.swift */; };
+		11E5735B27D9540200B4CC9F /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5735A27D9540200B4CC9F /* Order.swift */; };
 		2E2885DC27CFD0E500E7E013 /* GroupCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E2E5E7F27CED1DA002DCCA6 /* GroupCollectionViewCell.xib */; };
 		2E2BE50D27CAA4F2007EC208 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BE50C27CAA4F2007EC208 /* AppDelegate.swift */; };
 		2E2BE50F27CAA4F2007EC208 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BE50E27CAA4F2007EC208 /* SceneDelegate.swift */; };
@@ -59,9 +61,11 @@
 		11CAAC3F27CFED910020B301 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		11CAAC4127CFF76F0020B301 /* ApiPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiPath.swift; sourceTree = "<group>"; };
 		11CAAC4527D4B8DB0020B301 /* CartProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
-		11CAAC4727D4C1380020B301 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
+		11CAAC4727D4C1380020B301 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		11CAAC4927D624F50020B301 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
-		11CAAC4B27D62B0D0020B301 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		11CAAC4B27D62B0D0020B301 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		11E5735827D940AE00B4CC9F /* KeysDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysDefaults.swift; sourceTree = "<group>"; };
+		11E5735A27D9540200B4CC9F /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		2E2BE50927CAA4F2007EC208 /* ExpressOrder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpressOrder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E2BE50C27CAA4F2007EC208 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E2BE50E27CAA4F2007EC208 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -176,9 +180,11 @@
 				11CAAC3F27CFED910020B301 /* Menu.swift */,
 				11CAAC4127CFF76F0020B301 /* ApiPath.swift */,
 				11CAAC4527D4B8DB0020B301 /* CartProduct.swift */,
-				11CAAC4727D4C1380020B301 /* IntExtension.swift */,
+				11CAAC4727D4C1380020B301 /* Extension.swift */,
 				11CAAC4927D624F50020B301 /* Validator.swift */,
-				11CAAC4B27D62B0D0020B301 /* Auth.swift */,
+				11CAAC4B27D62B0D0020B301 /* User.swift */,
+				11E5735827D940AE00B4CC9F /* KeysDefaults.swift */,
+				11E5735A27D9540200B4CC9F /* Order.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -344,11 +350,13 @@
 				2E909AF127D136780081E8DE /* OrderDetailsTVCell.swift in Sources */,
 				2E2BE51127CAA4F2007EC208 /* MainMenuViewController.swift in Sources */,
 				2E46BFB127CFDB6500261929 /* ProductsTVCell.swift in Sources */,
-				11CAAC4827D4C1380020B301 /* IntExtension.swift in Sources */,
+				11CAAC4827D4C1380020B301 /* Extension.swift in Sources */,
 				11CAAC4A27D624F50020B301 /* Validator.swift in Sources */,
 				2E2BE50D27CAA4F2007EC208 /* AppDelegate.swift in Sources */,
 				11CAAC3827CCDA2F0020B301 /* HTTPMethod.swift in Sources */,
 				2E2BE53927CAA674007EC208 /* OrderDetailsViewController.swift in Sources */,
+				11E5735B27D9540200B4CC9F /* Order.swift in Sources */,
+				11E5735927D940AE00B4CC9F /* KeysDefaults.swift in Sources */,
 				11CAAC3627CBAC320020B301 /* NetworkManager.swift in Sources */,
 				11CAAC3E27CCE7D90020B301 /* Result.swift in Sources */,
 				11CAAC4027CFED910020B301 /* Menu.swift in Sources */,
@@ -358,7 +366,7 @@
 				2E2BE50F27CAA4F2007EC208 /* SceneDelegate.swift in Sources */,
 				11CAAC3C27CCE75B0020B301 /* Image.swift in Sources */,
 				2E2BE53A27CAA674007EC208 /* OrdersViewController.swift in Sources */,
-				11CAAC4C27D62B0D0020B301 /* Auth.swift in Sources */,
+				11CAAC4C27D62B0D0020B301 /* User.swift in Sources */,
 				11CAAC4627D4B8DB0020B301 /* CartProduct.swift in Sources */,
 				2E2E5E8027CED1DA002DCCA6 /* GroupCollectionViewCell.swift in Sources */,
 				2E2BE53B27CAA674007EC208 /* RakhmetViewController.swift in Sources */,

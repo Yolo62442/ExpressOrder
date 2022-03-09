@@ -12,11 +12,17 @@ class CartViewController: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var productsTV: UITableView!
     @IBOutlet weak var payButton: UIButton!
+    @IBOutlet weak var priceLable: UILabel!
+
     weak var delegate: CartDelegate?
     var cart: [CartProduct]?
     var restaurant: RestaurantDataContent?
-    var totalPrice: Int = 0
-    @IBOutlet weak var priceLable: UILabel!
+    private var totalPrice: Int {
+        let price = cart?.reduce(0) { $0 + ($1.product.price * $1.count) }
+        return price ?? 0
+    }
+    private let networkManager = NetworkManager()
+    private let user = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +32,40 @@ class CartViewController: UIViewController {
         productsTV.register(ProductsTVCell.nib, forCellReuseIdentifier: ProductsTVCell.identifier)
         titleLabel.text = restaurant?.name
         addressLabel.text = restaurant?.location
-        totalPrice = countTotalPrice()
-        priceLable.text = "\(totalPrice)  ₸"
+        priceLable.text = "\(totalPrice.prettyNumber()) ₸"
     }
-    func countTotalPrice() -> Int{
-        let price = cart?.reduce(0) { $0 + ($1.product.price * $1.count) }
-        return price ?? 0
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let _ = user.data {
+            payButton.setTitle("Оплатить", for: .normal)
+            payButton.isEnabled = true
+        } else {
+            payButton.setTitle("Войдите в аккаунт", for: .normal)
+            payButton.isEnabled = false
+        }
     }
     
     @IBAction func payButtonTaapped(_ sender: Any) {
-
+        guard let restaurant = restaurant, let cart = cart, let userData = user.data else { return }
+        networkManager.headers = ["Authorization": "\(userData.tokenType.capitalized) \(userData.accessToken)", "Content-Type": "application/json"]
+        networkManager.path = .makeOrder
+        networkManager.method = .post
+        networkManager.bodyParameters = ["restaurant_id": restaurant.id, "products": cart.map({ ["id": $0.product.id, "quantity": $0.count] })]
+        networkManager.makeRequest { [weak self] (result: Result<Auth>) in
+            switch result {
+            case .success(_):
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Order", message: "Order created successfully", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { [weak self] alert in
+                        self?.navigationController?.popToRootViewController(animated: true)
+                    }))
+                    self?.present(alert, animated: true)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -115,8 +145,7 @@ extension CartViewController: CartDelegate {
         }
         delegate?.countChanged(for: product, count: count)
         delegate?.cartChanged(cart)
-        self.totalPrice = countTotalPrice()
-        priceLable.text = "\(totalPrice)  ₸"
+        priceLable.text = "\(totalPrice.prettyNumber()) ₸"
         self.productsTV.reloadData()
     }
 }

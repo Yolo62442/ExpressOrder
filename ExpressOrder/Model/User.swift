@@ -33,3 +33,19 @@ struct UserData: Codable {
         case expiresIn = "expires_in"
     }
 }
+
+struct User {
+    private let defaults = UserDefaults()
+    var data: UserData? {
+        get {
+            if let data = self.defaults.object(forKey: KeysDefaults.keyUser) as? Data, let decodedData = try? PropertyListDecoder().decode(UserData.self, from: data) {
+                return decodedData
+            }
+            return nil
+        } set {
+            if let data = try? PropertyListEncoder().encode(newValue) {
+                self.defaults.set(data, forKey: KeysDefaults.keyUser)
+            }
+        }
+    }
+}

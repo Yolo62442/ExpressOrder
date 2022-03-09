@@ -24,4 +24,9 @@ class OrderDetailsTVCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configureCell(name: String, price: Int, quantity: Int) {
+        productLabel.text = "\(quantity) x \(name)"
+        priceLabel.text = "\(price.prettyNumber()) тг"
+    }
+    
 }

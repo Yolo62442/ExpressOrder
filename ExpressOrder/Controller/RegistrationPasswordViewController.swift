@@ -49,13 +49,15 @@ class RegistrationPasswordViewController: UIViewController {
             case .success(let auth):
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
+                    print(auth)
                     self.navigationController?.popToRootViewController(animated: true)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
-
+    }
+}
 
 extension RegistrationPasswordViewController {
     private func changeNextButtonColor(_ isActive: Bool) {

@@ -14,6 +14,7 @@ class SectionsViewController: UIViewController {
     weak var delegate: SectionsDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Меню"
         sectionsTV.dataSource = self
         sectionsTV.delegate = self
         sectionsTV.register(SectionsTVCell.nib, forCellReuseIdentifier: SectionsTVCell.identifier)

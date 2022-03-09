@@ -23,7 +23,8 @@ class OrdersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-//        unauthorizedView.isHidden = true
+        unauthorizedView.isHidden = true
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
         // Do any additional setup after loading the view.
     }
     func configureTableView(){

@@ -18,6 +18,7 @@ class OrderDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Детали заказа"
         configureTableView()
     }
 

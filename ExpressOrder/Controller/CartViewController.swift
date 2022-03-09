@@ -16,15 +16,18 @@ class CartViewController: UIViewController {
     var cart: [CartProduct]?
     var restaurant: RestaurantDataContent?
     var totalPrice: Int = 0
+    @IBOutlet weak var priceLable: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Корзина"
         productsTV.delegate = self
         productsTV.dataSource = self
         productsTV.register(ProductsTVCell.nib, forCellReuseIdentifier: ProductsTVCell.identifier)
         titleLabel.text = restaurant?.name
         addressLabel.text = restaurant?.location
         totalPrice = countTotalPrice()
+        priceLable.text = "\(totalPrice)  ₸"
     }
     func countTotalPrice() -> Int{
         let price = cart?.reduce(0) { $0 + ($1.product.price * $1.count) }
@@ -110,8 +113,10 @@ extension CartViewController: CartDelegate {
                 payButton.isEnabled = true
             }
         }
+        delegate?.countChanged(for: product, count: count)
         delegate?.cartChanged(cart)
         self.totalPrice = countTotalPrice()
+        priceLable.text = "\(totalPrice)  ₸"
         self.productsTV.reloadData()
     }
 }

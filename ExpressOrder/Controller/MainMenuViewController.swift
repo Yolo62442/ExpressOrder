@@ -33,12 +33,17 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var sectionsButton: UIButton!
     var currentSelected:Int = 0
     
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var quantityLabel: UILabel!
     private var cart = [CartProduct]()
     var menu: MenuData?
+    var quantity = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
+        navigationItem.title = menu?.restaurantName
+        navigationItem.backButtonTitle = ""
         // Do any additional setup after loading the view.
         locationLabel.text = menu?.location
         imagesCollectionView.dataSource = self
@@ -55,6 +60,7 @@ class MainMenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        productsTV.reloadData()
         let indexpath = IndexPath(row: currentSelected, section: 0)
         self.groupsCollectionView.scrollToItem(at: indexpath, at: .left, animated: true)
         let indexPath1 = IndexPath(row: 0, section: currentSelected)
@@ -75,6 +81,14 @@ class MainMenuViewController: UIViewController {
         vc.menu = menu
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
+    }
+    func countTotalPrice() -> Int{
+        let price = cart.reduce(0) { $0 + ($1.product.price * $1.count) }
+        return price
+    }
+    func countQuantity() -> Int{
+        let price = cart.reduce(0) { $0 +  $1.count }
+        return price
     }
     
 }
@@ -104,6 +118,8 @@ extension MainMenuViewController: CartDelegate {
             productBottomConstraint.isActive = false
             cartTopConstraint.isActive = true
         }
+        quantityLabel.text = "\(countQuantity()) шт"
+        priceLabel.text = "\(countTotalPrice())  ₸"
     }
 }
 
@@ -116,15 +132,6 @@ extension MainMenuViewController: SectionsDelegate{
 
 //MARK: - UITableViewDelegate
 extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if (section < currentSelected) {
-            currentSelected = section
-            let indexpath = IndexPath(row: section, section: 0)
-            self.groupsCollectionView.scrollToItem(at: indexpath, at: .left, animated: true)
-            self.groupsCollectionView.reloadData()
-        }
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return menu?.productCategories.count ?? 0
     }
@@ -160,6 +167,14 @@ extension MainMenuViewController: UITableViewDelegate, UITableViewDataSource{
         title.text = menu?.productCategories[section].name
         headerView.addSubview(title)
         return headerView
+    }
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if (section < currentSelected) {
+            currentSelected = section
+            let indexpath = IndexPath(row: section, section: 0)
+            self.groupsCollectionView.scrollToItem(at: indexpath, at: .right, animated: true)
+            self.groupsCollectionView.reloadData()
+        }
     }
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         if(section == currentSelected){
@@ -217,12 +232,12 @@ extension MainMenuViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if collectionView == groupsCollectionView{
-            return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        }
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        if collectionView == groupsCollectionView{
+//            return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+//        }
+//        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == groupsCollectionView {

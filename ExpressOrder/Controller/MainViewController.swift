@@ -12,6 +12,10 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let networkManager = NetworkManager()
     var restaurants: [RestaurantData]?
+    private let defaults = UserDefaults()
+    private var hasAlreadyLaunched: Bool {
+        return defaults.bool(forKey: "hasAlreadyLaunched")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

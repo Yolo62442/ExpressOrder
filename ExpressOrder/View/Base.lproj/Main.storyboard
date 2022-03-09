@@ -940,7 +940,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pg4-k0-cCS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-154" y="-490"/>
+            <point key="canvasLocation" x="-207" y="-518"/>
         </scene>
     </scenes>
     <resources>

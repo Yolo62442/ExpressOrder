@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 protocol DetailsDelegate: AnyObject{
     func sendToDetailVC()
 }
@@ -15,31 +16,34 @@ class OrdersViewController: UIViewController {
     @IBOutlet weak var unauthorizedView: UIView!
     @IBOutlet weak var logInButton: UIButton!
     var cellId = "OrderTableViewCell"
+    private let user = User()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        unauthorizedView.isHidden = user.data != nil
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        unauthorizedView.isHidden = true
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         // Do any additional setup after loading the view.
     }
-    func configureTableView(){
-        ordersTableView.delegate = self
-        ordersTableView.dataSource = self
-        ordersTableView.register(UINib(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
-           
-       }
     
     @IBAction func logInTapped(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "LogInViewController") as! LogInViewController
         navigationController?.pushViewController(vc, animated: true)
     }
     
+}
+
+extension OrdersViewController {
+    private func configureTableView() {
+        ordersTableView.delegate = self
+        ordersTableView.dataSource = self
+        ordersTableView.register(UINib(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
+    }
 }
 
 //MARK: - Send data to Order Details

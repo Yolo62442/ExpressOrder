@@ -11,7 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     private var hasAlreadyLaunched: Bool {
-        return UserDefaults.standard.bool(forKey: "hasAlreadyLaunched")
+        return UserDefaults.standard.bool(forKey: KeysDefaults.keyLaunch)
     }
 
 

@@ -46,10 +46,10 @@ class RegistrationPasswordViewController: UIViewController {
             case .success(let auth):
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    if (self.defaults.bool(forKey: "hasAlreadyLaunched")) {
+                    if (self.defaults.bool(forKey: KeysDefaults.keyLaunch)) {
                         self.navigationController?.popToRootViewController(animated: true)
                     } else {
-                        self.defaults.set(true, forKey: "hasAlreadyLaunched")
+                        self.defaults.set(true, forKey: KeysDefaults.keyLaunch)
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
                         self.navigationController?.setNavigationBarHidden(true, animated: true)
                         self.navigationController?.pushViewController(vc, animated: true)

@@ -15,10 +15,15 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var registrationButton: UIButton!
     private let validator = Validator()
     private let networkManager = NetworkManager()
+    private let defaults = UserDefaults()
+    private var user = User()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         logInButton.layer.masksToBounds = true
         logInButton.layer.cornerRadius = 5
+        emailTextField.text = "testios123@mail.kz"
+        passwordTextField.text = "test123123"
     }
     
     @IBAction func registrationButtonTapped(_ sender: Any) {
@@ -27,7 +32,23 @@ class LogInViewController: UIViewController {
     }
     
     @IBAction func logInButtonTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        networkManager.headers = ["Content-Type": "application/json"]
+        networkManager.path = .login
+        networkManager.method = .post
+        networkManager.bodyParameters = ["email": email, "password": password]
+        networkManager.makeRequest { [weak self] (result: Result<Auth>) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let auth):
+                self.user.data = auth.data
+                DispatchQueue.main.async { [weak self] in
+                    self?.navigationController?.popToRootViewController(animated: true)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     @IBAction func emailTextfieldChanged(_ sender: Any) {

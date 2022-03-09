@@ -172,7 +172,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Необходимо войти в свой аккаунт, чтобы увидеть историю заказов" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMB-kA-Mh2">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Необходимо войти в свой аккаунт, чтобы увидеть историю заказов" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMB-kA-Mh2">
                                                 <rect key="frame" x="0.0" y="52.5" width="354" height="53"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <nil key="textColor"/>
@@ -486,12 +486,13 @@
                         <barButtonItem key="rightBarButtonItem" image="rectangle.portrait.and.arrow.right" catalog="system" id="Pje-zh-TU3">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="loginButtonTapped:" destination="Vxy-6E-8ro" id="YrG-wo-Qe4"/>
+                                <action selector="logoutButtonTapped:" destination="Vxy-6E-8ro" id="PQq-uN-Kia"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="logoutButton" destination="Pje-zh-TU3" id="Ywk-MU-WeX"/>
                         <outlet property="tableView" destination="Wg9-xq-bGI" id="cel-5b-Tkl"/>
                     </connections>
                 </viewController>

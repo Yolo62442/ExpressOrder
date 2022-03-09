@@ -10,12 +10,14 @@ import UIKit
 class MainViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
     let networkManager = NetworkManager()
     var restaurants: [RestaurantData]?
     private let defaults = UserDefaults()
     private var hasAlreadyLaunched: Bool {
-        return defaults.bool(forKey: "hasAlreadyLaunched")
+        return defaults.bool(forKey: KeysDefaults.keyLaunch)
     }
+    private let user = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,7 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+        logoutButton.isEnabled = user.data != nil
         networkManager.path = .restaurants
         networkManager.fetchRestaurants { [weak self] result in
             guard let self = self else { return }
@@ -43,9 +46,27 @@ class MainViewController: UIViewController {
             }
         }
     }
-    @IBAction func loginButtonTapped(_ sender: UIBarButtonItem) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "LogInViewController") as! LogInViewController
-        navigationController?.pushViewController(vc, animated: true)
+    
+    @IBAction func logoutButtonTapped(_ sender: UIBarButtonItem) {
+        guard let userData = user.data else { return }
+        networkManager.headers = ["Authorization": "\(userData.tokenType.capitalized) \(userData.accessToken)"]
+        networkManager.method = .post
+        networkManager.path = .logout
+        networkManager.makeRequest { [weak self] (result: Result<Auth>) in
+            switch result {
+            case .success(let auth):
+                self?.defaults.removeObject(forKey: KeysDefaults.keyUser)
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Logout", message: "Successful logout", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                    self?.present(alert, animated: true) { [weak self] in
+                        self?.logoutButton.isEnabled = false
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 

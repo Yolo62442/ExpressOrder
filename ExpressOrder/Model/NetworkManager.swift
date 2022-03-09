@@ -8,7 +8,7 @@
 import Foundation
 
 class NetworkManager: NSObject {
-    let scheme = "http"
+    let scheme = "https"
     let host = "142.93.107.238"
     var path: ApiPath = .restaurants
     var method: HTTPMethod = .get
@@ -39,7 +39,7 @@ class NetworkManager: NSObject {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
         if let body = bodyParameters {
-            urlRequest.httpBody = body.description.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)?.data(using: .utf8)
+            urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body)
         }
         headers?.forEach { urlRequest.setValue($0.1, forHTTPHeaderField: $0.0) }
         return urlRequest

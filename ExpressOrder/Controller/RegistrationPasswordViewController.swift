@@ -40,6 +40,7 @@ class RegistrationPasswordViewController: UIViewController {
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         guard let email = email, let password = passwordTextField.text else { return }
+        networkManager.headers = ["Content-Type": "application/json"]
         networkManager.path = .register
         networkManager.method = .post
         networkManager.bodyParameters = ["email": email, "password": password]

@@ -12,6 +12,7 @@ enum ApiPath {
     case restaurants
     case menu(_: Int)
     case register
+    case login
     
     var stringPath: String {
         switch self {
@@ -21,6 +22,8 @@ enum ApiPath {
             return "\(ApiPath.base)/menu/\(id)"
         case .register:
             return "\(ApiPath.base)/register"
+        case .login:
+            return "\(ApiPath.base)/login"
         }
     }
 }

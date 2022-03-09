@@ -10,6 +10,16 @@ import Foundation
 struct Auth: Codable {
     let message: String
     let data: UserData?
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        message = try container.decode(String.self, forKey: .message)
+        data = try? container.decode(UserData.self, forKey: .data)
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case message, data
+    }
 }
 
 struct UserData: Codable {

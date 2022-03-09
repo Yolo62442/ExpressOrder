@@ -55,7 +55,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let restaurant = restaurants?[indexPath.row]
         networkManager.path = .menu(restaurant?.data.id ?? 1)
-        networkManager.fetchData { [weak self] (result: Result<Menu>) in
+        networkManager.makeRequest { [weak self] (result: Result<Menu>) in
             guard let self = self else { return }
             switch result {
             case .success(let menu):

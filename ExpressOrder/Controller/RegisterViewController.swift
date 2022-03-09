@@ -13,7 +13,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var offerButton: UIButton!
     
-    let attributeString = NSMutableAttributedString(
+    private let attributeString = NSMutableAttributedString(
        string: "условия публичной оферты",
        attributes: [
             .font: UIFont.systemFont(ofSize: 14),
@@ -21,6 +21,7 @@ class RegisterViewController: UIViewController {
             .underlineStyle: NSUnderlineStyle.single.rawValue
        ]
     )
+    private let validator = Validator()
 
     
     override func viewDidLoad() {
@@ -32,7 +33,7 @@ class RegisterViewController: UIViewController {
 
     @IBAction func textFieldChanged(_ sender: UITextField) {
         guard let email = emailTextField.text else { return }
-        changeNextButtonColor(!email.isEmpty)
+        changeNextButtonColor(validator.validate(email, with: [.validEmail]))
     }
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {

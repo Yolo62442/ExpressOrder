@@ -59,7 +59,7 @@ class NetworkManager: NSObject {
         }.resume()
     }
     
-    func fetchData<T: Codable>(completion: @escaping ((Result<T>) -> Void)) {
+    func makeRequest<T: Codable>(completion: @escaping ((Result<T>) -> Void)) {
         session.dataTask(with: urlRequest) { (data, response, error) in
             if let error = error { return completion(.failure(error)) }
             guard let response = response as? HTTPURLResponse, 200..<300 ~= response.statusCode else { return completion(.failure(NSError())) }

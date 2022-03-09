@@ -39,6 +39,10 @@ class MainViewController: UIViewController {
             }
         }
     }
+    @IBAction func loginButtonTapped(_ sender: UIBarButtonItem) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "LogInViewController") as! LogInViewController
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -63,7 +67,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 DispatchQueue.main.async {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainMenuViewController") as! MainMenuViewController
                     vc.menu = menu.data
-                    self.navigationController?.pushViewController(vc, animated: false)
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
             case .failure(let error):
                 print(error.localizedDescription)

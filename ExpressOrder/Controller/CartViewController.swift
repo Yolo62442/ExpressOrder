@@ -12,11 +12,15 @@ class CartViewController: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var productsTV: UITableView!
     @IBOutlet weak var payButton: UIButton!
+    @IBOutlet weak var priceLable: UILabel!
+
     weak var delegate: CartDelegate?
     var cart: [CartProduct]?
     var restaurant: RestaurantDataContent?
-    var totalPrice: Int = 0
-    @IBOutlet weak var priceLable: UILabel!
+    private var totalPrice: Int {
+        let price = cart?.reduce(0) { $0 + ($1.product.price * $1.count) }
+        return price ?? 0
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +30,7 @@ class CartViewController: UIViewController {
         productsTV.register(ProductsTVCell.nib, forCellReuseIdentifier: ProductsTVCell.identifier)
         titleLabel.text = restaurant?.name
         addressLabel.text = restaurant?.location
-        totalPrice = countTotalPrice()
-        priceLable.text = "\(totalPrice)  ₸"
-    }
-    func countTotalPrice() -> Int{
-        let price = cart?.reduce(0) { $0 + ($1.product.price * $1.count) }
-        return price ?? 0
+        priceLable.text = "\(totalPrice.prettyNumber()) ₸"
     }
     
     @IBAction func payButtonTaapped(_ sender: Any) {
@@ -115,8 +114,7 @@ extension CartViewController: CartDelegate {
         }
         delegate?.countChanged(for: product, count: count)
         delegate?.cartChanged(cart)
-        self.totalPrice = countTotalPrice()
-        priceLable.text = "\(totalPrice)  ₸"
+        priceLable.text = "\(totalPrice.prettyNumber()) ₸"
         self.productsTV.reloadData()
     }
 }

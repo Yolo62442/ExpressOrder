@@ -15,7 +15,6 @@ class RegistrationPasswordViewController: UIViewController {
     @IBOutlet weak var offerButton: UIButton!
     
     
-    
     var email: String?
     var offerButtonAttributeString: NSMutableAttributedString?
     private let validator = Validator()

@@ -407,7 +407,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BaC-Sa-0b3">
-                                <rect key="frame" x="100" y="712" width="214" height="50"/>
+                                <rect key="frame" x="100" y="762" width="214" height="50"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="214" id="HUV-Tn-K7o"/>
@@ -435,7 +435,7 @@
                         <viewLayoutGuide key="safeArea" id="5Fo-of-dF1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="5Fo-of-dF1" firstAttribute="bottom" secondItem="BaC-Sa-0b3" secondAttribute="bottom" constant="100" id="OE9-4j-Yg2"/>
+                            <constraint firstItem="5Fo-of-dF1" firstAttribute="bottom" secondItem="BaC-Sa-0b3" secondAttribute="bottom" constant="50" id="OE9-4j-Yg2"/>
                             <constraint firstItem="5Fo-of-dF1" firstAttribute="trailing" secondItem="6bZ-wW-lNN" secondAttribute="trailing" constant="20" id="S88-y8-Nqc"/>
                             <constraint firstItem="6bZ-wW-lNN" firstAttribute="leading" secondItem="5Fo-of-dF1" secondAttribute="leading" constant="20" id="Shn-9e-oFR"/>
                             <constraint firstItem="Knh-Up-uVx" firstAttribute="top" secondItem="5Fo-of-dF1" secondAttribute="top" constant="100" id="Tp3-er-5Ob"/>
@@ -483,6 +483,12 @@
                     <tabBarItem key="tabBarItem" title="Главная" image="house" catalog="system" id="1Qb-av-l1l"/>
                     <navigationItem key="navigationItem" title="Заказ с собой" id="YHb-4d-lvV">
                         <barButtonItem key="backBarButtonItem" title=" " id="U8Z-IV-Aih"/>
+                        <barButtonItem key="rightBarButtonItem" image="rectangle.portrait.and.arrow.right" catalog="system" id="Pje-zh-TU3">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="loginButtonTapped:" destination="Vxy-6E-8ro" id="YrG-wo-Qe4"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -943,6 +949,7 @@
         <image name="lanyardcard" catalog="system" width="108" height="128"/>
         <image name="line.3.horizontal" catalog="system" width="128" height="64"/>
         <image name="logo" width="40" height="40"/>
+        <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="108"/>
         <image name="testImage" width="750" height="489"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

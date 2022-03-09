@@ -15,9 +15,10 @@ class OrdersViewController: UIViewController {
     @IBOutlet weak var unauthorizedView: UIView!
     @IBOutlet weak var logInButton: UIButton!
     var cellId = "OrderTableViewCell"
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLoad() {
@@ -36,7 +37,7 @@ class OrdersViewController: UIViewController {
     
     @IBAction func logInTapped(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "LogInViewController") as! LogInViewController
-        navigationController?.pushViewController(vc, animated: false)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

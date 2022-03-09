@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(MainMenuTableViewCell.nib, forCellReuseIdentifier: MainMenuTableViewCell.identifier)
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +63,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 DispatchQueue.main.async {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainMenuViewController") as! MainMenuViewController
                     vc.menu = menu.data
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.navigationController?.pushViewController(vc, animated: false)
                 }
             case .failure(let error):
                 print(error.localizedDescription)

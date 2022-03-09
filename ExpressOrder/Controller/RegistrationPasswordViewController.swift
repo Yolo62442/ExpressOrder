@@ -47,18 +47,14 @@ class RegistrationPasswordViewController: UIViewController {
         networkManager.makeRequest { [weak self] (result: Result<Auth>) in
             switch result {
             case .success(let auth):
-                print(auth)
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
-    }
-}
 
 
 extension RegistrationPasswordViewController {

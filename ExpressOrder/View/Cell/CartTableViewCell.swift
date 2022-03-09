@@ -1,16 +1,14 @@
 //
-//  ProductTableViewCell.swift
+//  CartTableViewCell.swift
 //  ExpressOrder
 //
-//  Created by Ainura on 02.03.2022.
+//  Created by Ainura on 05.03.2022.
 //
 
 import UIKit
 
-class ProductTableViewCell: UITableViewCell {
-    
-    static let identifier = "ProductTableViewCell"
-    static let nib = UINib(nibName: identifier, bundle: nil)
+class CartTableViewCell: UITableViewCell {
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

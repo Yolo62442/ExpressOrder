@@ -18,6 +18,8 @@ class RegistrationPasswordViewController: UIViewController {
     
     var email: String?
     var offerButtonAttributeString: NSMutableAttributedString?
+    private let validator = Validator()
+    private let networkManager = NetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,17 +28,33 @@ class RegistrationPasswordViewController: UIViewController {
         offerButton.setAttributedTitle(offerButtonAttributeString, for: .normal)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     @IBAction func textFieldChanged(_ sender: UITextField) {
         guard let password = passwordTextField.text else { return }
-        changeNextButtonColor(!password.isEmpty)
+        changeNextButtonColor(validator.validate(password, with: [.validPassword]))
     }
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         guard let email = email, let password = passwordTextField.text else { return }
-        print(email, password)
-        navigationController?.popToRootViewController(animated: false)
-    }
-}
+        networkManager.headers = ["Content-Type": "application/json"]
+        networkManager.path = .register
+        networkManager.method = .post
+        networkManager.bodyParameters = ["email": email, "password": password]
+        networkManager.makeRequest { [weak self] (result: Result<Auth>) in
+            switch result {
+            case .success(let auth):
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
 
 
 extension RegistrationPasswordViewController {

@@ -42,7 +42,7 @@ class MainViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                print(error)
             }
         }
     }
@@ -52,19 +52,14 @@ class MainViewController: UIViewController {
         networkManager.headers = ["Authorization": "\(userData.tokenType.capitalized) \(userData.accessToken)"]
         networkManager.method = .post
         networkManager.path = .logout
-        networkManager.makeRequest { [weak self] (result: Result<Auth>) in
-            switch result {
-            case .success(let auth):
-                self?.defaults.removeObject(forKey: KeysDefaults.keyUser)
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Logout", message: "Successful logout", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-                    self?.present(alert, animated: true) { [weak self] in
-                        self?.logoutButton.isEnabled = false
-                    }
+        networkManager.makeRequest { [weak self] (_: Result<Auth>) in
+            self?.defaults.removeObject(forKey: KeysDefaults.keyUser)
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Logout", message: "Successful logout", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                self?.present(alert, animated: true) { [weak self] in
+                    self?.logoutButton.isEnabled = false
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
             }
         }
     }

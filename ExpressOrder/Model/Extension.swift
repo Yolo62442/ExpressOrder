@@ -24,12 +24,17 @@ extension Int {
 }
 
 extension String {
-    func prettyDate() -> String {
+    func dateComponenets() -> DateComponents {
         let isoDate = String(Array(self)[0...18] ) + "+0000"
         let dateFormatter = ISO8601DateFormatter()
         let date = dateFormatter.date(from: isoDate)!
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        return components
+    }
+    
+    func prettyDate() -> String {
+        let components = dateComponenets()
         if let day = components.day, let month = components.month, let year = components.year, let hour = components.hour, let minute = components.minute {
             let correctDay = day > 9 ? "\(day)" : "0\(day)"
             let correctMonth = month > 9 ? "\(month)" : "0\(month)"

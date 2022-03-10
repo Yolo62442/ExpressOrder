@@ -16,6 +16,8 @@ class OrderDetailsViewController: UIViewController {
     @IBOutlet weak var orderNumLabel: UILabel!
     @IBOutlet weak var orderListTableView: UITableView!
     var order: OrderDataContent?
+    private let networkManager = NetworkManager()
+    private var products = [Product]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,23 @@ class OrderDetailsViewController: UIViewController {
             locationLabel.text = order.restaurant.location
             orderNumLabel.text = "№\(order.id)"
             dateLabel.text = order.createdAt.prettyDate()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        networkManager.path = .menu(order?.restaurant.id ?? 0)
+        networkManager.makeRequest { [weak self] (result: Result<Menu>) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let menu):
+                self.products.append(contentsOf: menu.data.productCategories.flatMap { $0.products })
+                DispatchQueue.main.async { [weak self] in
+                    self?.orderListTableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 
@@ -45,7 +64,11 @@ extension OrderDetailsViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: OrderDetailsTVCell.identifier, for: indexPath) as! OrderDetailsTVCell
-        cell.configureCell(name: "There should be name", price: 1000, quantity: order?.orderDetails[indexPath.row].quantity ?? 1)
+        let index = products.firstIndex { $0.id == order?.orderDetails[indexPath.row].productId }
+        if let index = index {
+            let product = products[index]
+            cell.configureCell(name: product.name, price: product.price, quantity: order?.orderDetails[indexPath.row].quantity ?? 1)
+        }
         return cell
     }
    
